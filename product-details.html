@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Book Details | BookStore</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <header>
+        <nav>
+            <button id="add-to-cart" class="btn-details" onclick="addToCart()">
+                Add to Cart 🛒
+            </button>
+
+            <br><br>
+
+            <a href="index.html" class="btn-details">
+                Back to Home
+            </a>
+
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="help.html">Help</a>
+                <a href="contact.html">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="book-details">
+
+        <div class="details-image">
+            <img id="book-image" src="images/book1.jpg" alt="Book Cover">
+        </div>
+
+        <div class="details-info">
+
+            <h1 id="book-title">قوة الآن</h1>
+
+            <h3 id="book-author">Author: Eckhart Tolle</h3>
+
+            <p id="book-description">
+                كتاب قوة الآن يتحدث عن أهمية العيش في اللحظة الحالية،
+                والتخلص من القلق المرتبط بالماضي والمستقبل.
+            </p>
+
+            <h2 id="book-price">Price: $15</h2>
+
+            <label for="quantity">Quantity:</label>
+
+            <input type="number" id="quantity" value="1" min="1" max="10">
+
+            <br><br>
+
+            <button onclick="buyBook()" class="btn-details">
+                Buy Now 🛒
+            </button>
+
+            <br><br>
+
+            <a href="index.html" class="btn-details">
+                Back to Home
+            </a>
+
+        </div>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Bookstore. All rights reserved.</p>
+    </footer>
+
+    <script>
+
+        const books = {
+
+            1: {
+                title: "قوة الآن",
+                author: "Eckhart Tolle",
+                description: "كتاب يساعدك على التركيز على اللحظة الحالية والتعامل مع الأفكار والقلق بطريقة أكثر وعيًا.",
+                price: 15,
+                image: "images/book1.jpg"
+            },
+
+            2: {
+                title: "الجين الأناني",
+                author: "Richard Dawkins",
+                description: "كتاب علمي يشرح التطور من منظور الجينات ودورها في تفسير السلوك والكائنات الحية.",
+                price: 18,
+                image: "images/book2.jpg"
+            },
+
+            3: {
+                title: "الأب الغني الأب الفقير",
+                author: "Robert Kiyosaki",
+                description: "كتاب عن الثقافة المالية والادخار والاستثمار وطريقة التفكير في المال.",
+                price: 20,
+                image: "images/book3.jpg"
+            },
+
+            4: {
+                title: "العقلية",
+                author: "Carol S. Dweck",
+                description: "كتاب يتناول تأثير طريقة التفكير على التعلم والتطور الشخصي والنجاح.",
+                price: 17,
+                image: "images/book4.jpg"
+            },
+
+            5: {
+                title: "ثورة الذكاء الاصطناعي",
+                author: "غير محدد",
+                description: "كتاب عن الذكاء الاصطناعي وتطبيقاته وتأثيره في حياتنا ومستقبل التكنولوجيا.",
+                price: 22,
+                image: "images/book5.jpg"
+            },
+
+            6: {
+                title: "رحلة إلى مركز الأرض",
+                author: "Jules Verne",
+                description: "رواية مغامرات خيالية عن رحلة استكشافية مثيرة إلى أعماق الأرض.",
+                price: 16,
+                image: "images/book6.jpg"
+            },
+
+            7: {
+                title: "كثيب",
+                author: "Frank Herbert",
+                description: "رواية خيال علمي تدور أحداثها حول كوكب صحراوي وصراع على السلطة والموارد.",
+                price: 25,
+                image: "images/book7.jpg"
+            },
+
+            8: {
+                title: "سيد الخواتم",
+                author: "J. R. R. Tolkien",
+                description: "ملحمة فانتازيا عن رحلة خطيرة لإنقاذ العالم من قوة الخاتم.",
+                price: 28,
+                image: "images/book8.jpg"
+            },
+
+            9: {
+                title: "Harry Potter",
+                author: "J. K. Rowling",
+                description: "سلسلة فانتازيا عن طالب يكتشف عالم السحر ويخوض مغامرات مليئة بالأسرار.",
+                price: 24,
+                image: "images/book9.jpg"
+            },
+
+            10: {
+                title: "شيفرة دافنشي",
+                author: "Dan Brown",
+                description: "رواية تشويق وغموض تتبع سلسلة من الألغاز والرموز التاريخية.",
+                price: 19,
+                image: "images/book10.jpg"
+            },
+
+            11: {
+                title: "الجريمة والعقاب",
+                author: "Fyodor Dostoevsky",
+                description: "رواية كلاسيكية تستكشف الضمير والشعور بالذنب والصراع النفسي.",
+                price: 21,
+                image: "images/book11.jpg"
+            },
+
+            12: {
+                title: "كلب الباسكرفيل",
+                author: "Arthur Conan Doyle",
+                description: "مغامرة غامضة يحقق فيها شيرلوك هولمز في أسطورة كلب مخيف.",
+                price: 14,
+                image: "images/book12.jpg"
+            },
+
+            13: {
+                title: "جريمة في قطار الشرق السريع",
+                author: "Agatha Christie",
+                description: "رواية بوليسية يحقق فيها المحقق هيركيول بوارو في جريمة غامضة على متن قطار.",
+                price: 18,
+                image: "images/book13.jpg"
+            },
+
+            14: {
+                title: "ثم لم يبق أحد",
+                author: "Agatha Christie",
+                description: "رواية غموض عن مجموعة من الأشخاص يجدون أنفسهم في جزيرة وتحيط بهم أحداث مقلقة.",
+                price: 18,
+                image: "images/book14.jpg"
+            },
+
+            15: {
+                title: "كتاب 15",
+                author: "غير محدد",
+                description: "تفاصيل هذا الكتاب ستُضاف بعد تحديد اسمه ومؤلفه.",
+                price: 15,
+                image: "images/book15.jpg"
+            },
+
+            16: {
+                title: "عداء الطائرة الورقية",
+                author: "Khaled Hosseini",
+                description: "رواية عن الصداقة والندم والعلاقات الإنسانية وفرص التكفير عن أخطاء الماضي.",
+                price: 20,
+                image: "images/book16.jpg"
+            },
+
+            17: {
+                title: "يوتوبيا",
+                author: "أحمد خالد توفيق",
+                description: "رواية خيال اجتماعي تتصور مجتمعًا منقسمًا بصورة حادة بين طبقات مختلفة.",
+                price: 16,
+                image: "images/book17.jpg"
+            },
+
+            18: {
+                title: "عزازيل",
+                author: "يوسف زيدان",
+                description: "رواية تاريخية تتناول رحلة شخصية وصراعات فكرية وروحية في العصور القديمة.",
+                price: 19,
+                image: "images/book18.jpg"
+            },
+
+            19: {
+                title: "الفيل الأزرق",
+                author: "أحمد مراد",
+                description: "رواية تشويق نفسي تتشابك فيها أسرار الماضي مع أحداث غامضة.",
+                price: 20,
+                image: "images/book19.jpg"
+            },
+
+            20: {
+                title: "هيبتا",
+                author: "محمد صادق",
+                description: "رواية تتناول العلاقات العاطفية ومراحل الحب المختلفة.",
+                price: 17,
+                image: "images/book20.jpg"
+            }
+
+        };
+
+        const params = new URLSearchParams(window.location.search);
+
+        const bookId = params.get("book") || "1";
+
+        const book = books[bookId];
+
+        if (book) {
+
+            document.getElementById("book-title").textContent = book.title;
+
+            document.getElementById("book-author").textContent =
+                "Author: " + book.author;
+
+            document.getElementById("book-description").textContent =
+                book.description;
+
+            document.getElementById("book-price").textContent =
+                "Price: $" + book.price;
+
+            document.getElementById("book-image").src = book.image;
+
+            document.getElementById("book-image").alt = book.title;
+
+            document.title = book.title + " | BookStore";
+
+        } else {
+
+            document.getElementById("book-title").textContent =
+                "Book Not Found";
+
+            document.getElementById("book-author").textContent = "";
+
+            document.getElementById("book-description").textContent =
+                "Sorry, this book could not be found.";
+
+            document.getElementById("book-price").textContent = "";
+
+            document.getElementById("book-image").style.display = "none";
+
+        }
+        function addToCart() {
+
+            if (!book) {
+                alert("Book not found!");
+                return;
+            }
+
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+            const existingBook = cart.find(item => item.id === bookId);
+
+            if (existingBook) {
+                existingBook.quantity++;
+            } else {
+                cart.push({
+                    id: bookId,
+                    title: book.title,
+                    author: book.author,
+                    price: book.price,
+                    image: book.image,
+                    quantity: 1
+                });
+            }
+
+            localStorage.setItem("cart", JSON.stringify(cart));
+
+            alert("Book added to cart successfully! 🛒");
+        }
+        function buyBook() {
+
+    if (!book) {
+        alert("Book not found!");
+        return;
+    }
+
+    const quantity = Number(
+        document.getElementById("quantity").value
+    );
+
+    if (!Number.isInteger(quantity) || quantity < 1 || quantity > 10) {
+        alert("Please enter a quantity between 1 and 10.");
+        return;
+    }
+
+    const purchase = {
+        id: bookId,
+        title: book.title,
+        author: book.author,
+        price: book.price,
+        image: book.image,
+        quantity: quantity
+    };
+
+    localStorage.setItem(
+        "purchase",
+        JSON.stringify(purchase)
+    );
+
+    window.location.href = "create-account.html";
+}
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You | BookStore</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo">Book<span>Store</span></a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="help.html">Help</a>
+                <a href="contact.html">Contact</a>
+            </div>
+        </nav>
+    </header>
+    <main class="thankyou-container">
+        <div class="thankyou-card">
+            <div class="success-icon">✓</div>
+            <h1>Thank You!</h1>
+            <h2>Thank you for shopping with us!</h2>
+            <p>
+                Your order has been confirmed successfully.
+                We appreciate your visit to our bookstore.
+            </p>
+            <div id="order-summary"></div>
+            <a href="index.html" class="btn-details">
+                Home Page
+            </a>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2026 Bookstore. All rights reserved.</p>
+    </footer>
+    <script>
+        const orderSummary = document.getElementById("order-summary");
+        const lastOrder = JSON.parse(localStorage.getItem("lastOrder"));
+        if (lastOrder) {
+            const total = lastOrder.price * lastOrder.quantity;
+            orderSummary.innerHTML = `
+            <div class="thankyou-order">
+                <p><strong>Book:</strong> ${lastOrder.title}</p>
+                <p><strong>Quantity:</strong> ${lastOrder.quantity}</p>
+                <p><strong>Total:</strong> $${total.toFixed(2)}</p>
+            </div>
+        `;
+        }
+    </script>
+</body>
+
+</html>

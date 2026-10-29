@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Purchase Review | BookStore</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo">Book<span>Store</span></a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="help.html">Help</a>
+                <a href="contact.html">Contact</a>
+            </div>
+        </nav>
+    </header>
+    <main class="review-container">
+        <h1>Purchase Review</h1>
+        <p class="review-subtitle">Please review your order before confirming.</p>
+        <div id="purchase-content"></div>
+        <div class="review-actions">
+            <a href="index.html" class="btn-details">Continue Shopping</a>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2026 Bookstore. All rights reserved.</p>
+    </footer>
+    <script>
+        const purchaseContent = document.getElementById("purchase-content");
+        const purchase = JSON.parse(localStorage.getItem("purchase"));
+        if (!purchase) {
+            purchaseContent.innerHTML = `
+            <div class="empty-message">
+                <h2>No product selected!</h2>
+                <p>Please return to the bookstore and choose a book.</p>
+                <a href="index.html" class="btn-details">Browse Books</a>
+            </div>
+        `;
+        } else {
+            const total = purchase.price * purchase.quantity;
+            purchaseContent.innerHTML = `
+            <div class="review-card">
+                <img
+                    src="${purchase.image}"
+                    alt="${purchase.title}"
+                    class="review-image"
+                >
+                <div class="review-info">
+                    <h2>${purchase.title}</h2>
+                    <p><strong>Author:</strong> ${purchase.author}</p>
+                    <p><strong>Quantity:</strong> ${purchase.quantity}</p>
+                    <p><strong>Price per book:</strong>
+                        $${purchase.price.toFixed(2)}
+                    </p>
+                    <h3>Total: $${total.toFixed(2)}</h3>
+                </div>
+            </div>
+            <div class="confirm-box">
+                <p>Are you sure you want to confirm your purchase?</p>
+                <button
+                    id="confirm-purchase"
+                    class="confirm-btn"
+                    type="button"
+                >
+                    Confirm Purchase
+                </button>
+            </div>
+        `;
+            document.getElementById("confirm-purchase")
+                .addEventListener("click", function () {
+                    localStorage.setItem(
+                        "lastOrder",
+                        JSON.stringify(purchase)
+                    );
+                    localStorage.removeItem("purchase");
+                    window.location.href = "thank-you.html";
+                });
+        }
+    </script>
+</body>
+
+</html>
